@@ -12,7 +12,7 @@ import com.gk.model.User;
 import com.gk.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
 	
 	@Autowired
