@@ -1,5 +1,8 @@
 package com.gk.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Entitlement {
 
 	private long id;
@@ -31,6 +34,12 @@ public class Entitlement {
 	}
 	public void setOperation(String operation) {
 		this.operation = operation;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Entitlement [id=" + id + ", value=" + value + ", operation=" + operation + "]";
 	}
 	
 	

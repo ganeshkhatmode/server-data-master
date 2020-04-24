@@ -22,6 +22,7 @@ public class EntitlementServiceImpl implements EntitlementService {
 		entitlement.setId(id);
 		id++;
 		entitlements.add(entitlement);
+		System.out.println(entitlement);
 		return entitlement;
 	}
 
@@ -33,10 +34,10 @@ public class EntitlementServiceImpl implements EntitlementService {
 
 	@Override
 	public Entitlement findById(final long id) throws EntitlementIdNotFoundException {
-		Entitlement entilementFind = entitlements.stream().filter(entilement -> entilement.getId() == id)
-				.collect(Collectors.toList()).get(0);
-		if (entilementFind != null) {
-			return entilementFind;
+		List<Entitlement> entilementFind = entitlements.stream().filter(entilement -> entilement.getId() == id)
+				.collect(Collectors.toList());
+		if (entilementFind.size() != 0) {
+			return entilementFind.get(0);
 		} else
 			throw new EntitlementIdNotFoundException("Not found  entitlement " + id + " id.");
 	}
