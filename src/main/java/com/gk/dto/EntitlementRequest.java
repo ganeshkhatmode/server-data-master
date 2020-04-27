@@ -22,6 +22,11 @@ public class EntitlementRequest {
 	public void setEntitlements(List<Entitlement> entitlements) {
 		this.entitlements = entitlements;
 	}
+
+	@Override
+	public String toString() {
+		return "EntitlementRequest [entitlements=" + entitlements + "]";
+	}
 	
 	
 	

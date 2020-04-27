@@ -2,6 +2,7 @@ package com.gk.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -45,16 +46,21 @@ public class EntitlementServiceImpl implements EntitlementService {
 
 	@Override
 	public List<Entitlement> update(EntitlementRequest entitlementRequest) {
-		for(Entitlement entitlement: entitlementRequest.getEntitlements()) {
-			if(entitlement.getOperation().toLowerCase().equals("remove")) {
-				entitlements.remove(entitlement);
-			}else if(entitlement.getOperation().toLowerCase().equals("add")) {
+		System.out.println("Request :: " + entitlementRequest.toString());
+		for (Entitlement entitlement : entitlementRequest.getEntitlements()) {
+			if (entitlement.getOperation().toLowerCase().equals("remove")) {
+
+				List<Entitlement> eList = entitlements.stream().filter(e -> e.getValue().equals(entitlement.getValue()))
+						.collect(Collectors.toList());
+				
+				if(eList.size() > 0) {
+                    entitlements.removeAll(eList);
+				}
+			} else if (entitlement.getOperation().toLowerCase().equals("add")) {
 				entitlements.add(entitlement);
 			}
 		}
 		return entitlements;
 	}
-	
-	
 
 }
