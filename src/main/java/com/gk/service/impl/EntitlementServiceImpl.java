@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.gk.dto.EntitlementRequest;
 import com.gk.exception.EntitlementIdNotFoundException;
 import com.gk.model.Entitlement;
 import com.gk.service.EntitlementService;
@@ -41,5 +42,19 @@ public class EntitlementServiceImpl implements EntitlementService {
 		} else
 			throw new EntitlementIdNotFoundException("Not found  entitlement " + id + " id.");
 	}
+
+	@Override
+	public List<Entitlement> update(EntitlementRequest entitlementRequest) {
+		for(Entitlement entitlement: entitlementRequest.getEntitlements()) {
+			if(entitlement.getOperation().toLowerCase().equals("remove")) {
+				entitlements.remove(entitlement);
+			}else if(entitlement.getOperation().toLowerCase().equals("add")) {
+				entitlements.add(entitlement);
+			}
+		}
+		return entitlements;
+	}
+	
+	
 
 }
